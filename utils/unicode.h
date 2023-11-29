@@ -1,3 +1,5 @@
+#pragma once
+
 #define COMBO(name, POS, LAYERS, BINDINGS) \
     / { \
         combos { \
