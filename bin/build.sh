@@ -1,6 +1,17 @@
 #!/usr/bin/env bash
 # Pulled from https://github.com/urob/zmk-config/, with some minor modifications
 
+if ! command -v yq &> /dev/null; then
+    echo "Did not find 'yq', it is required for this script to function."
+    exit 1
+fi
+
+if ! command -v jq &> /dev/null; then
+    echo "Did not find 'jq', it is required for this script to function."
+    exit 1
+fi
+
+
 # Parse input arguments
 while [[ $# -gt 0 ]]; do
     case $1 in
@@ -20,8 +31,13 @@ while [[ $# -gt 0 ]]; do
         # comma or space separated list of boards (use quotes if space separated)
         # if ommitted, will compile list of boards in build.yaml
         -b|--board)
-            BOARDS="$2"
             shift
+            IFS=',' read -ra BOARDS <<< "$1"
+            ;;
+
+        -s|--shield)
+            shift
+            IFS=',' read -ra SHIELDS <<< "$1"
             ;;
 
         -v|--version)
@@ -85,12 +101,23 @@ done
 [[ -z $DOCKER_ZMK_DIR ]] && DOCKER_ZMK_DIR="/workspace/zmk"
 [[ -z $DOCKER_CONFIG_DIR ]] && DOCKER_CONFIG_DIR="/workspace/zmk-config"
 
-[[ -z $BOARDS ]] && BOARDS="$(grep '^[[:space:]]*\-[[:space:]]*board:' $HOST_CONFIG_DIR/build.yaml | sed 's/^.*: *//')"
-
 [[ -z $CLEAR_CACHE ]] && CLEAR_CACHE="false"
 
 DOCKER_IMG="zmkfirmware/zmk-dev-arm:$ZEPHYR_VERSION"
 DOCKER_BIN="docker"
+
+query=".include[]"
+if [ ${#BOARDS[@]} -gt 0 ]; then
+    board_filters=$(printf "\"%s\"," "${BOARDS[@]}")
+    board_filters=${board_filters%,} # Remove the trailing comma
+    query+=" | select(.board | IN($board_filters))"
+fi
+if [ ${#SHIELDS[@]} -gt 0 ]; then
+    shield_filters=$(printf "\"%s\"," "${SHIELDS[@]}")
+    shield_filters=${shield_filters%,} # Remove the trailing comma
+    query+=" | select(.shield? | IN($shield_filters))"
+fi
+to_build=$(yq -e "$query" "$HOST_CONFIG_DIR/build.yaml")
 
 # +--------------------+
 # | BUILD THE FIRMWARE |
@@ -128,12 +155,16 @@ CONFIG_DIR="$DOCKER_CONFIG_DIR/config"
 
 # usage: compile_board board
 compile_board () {
-    BUILD_DIR="${1}_$SUFFIX"
-    LOGFILE="$LOG_DIR/zmk_build_$1.log"
+    board=$(echo "$1" | jq -r '.board')
+    shield=$(echo "$1" | jq -r '.shield // ""')
+    [[ -z $shield ]] && shield="" || shield="-DSHIELD=${shield}"
+
+    BUILD_DIR="${board}_${shield}_$SUFFIX"
+    LOGFILE="$LOG_DIR/zmk_build_$board_$shield.log"
     [[ $MULTITHREAD = "true" ]] || echo -en "\n$(tput setaf 2)Building $1... $(tput sgr0)"
     [[ $MULTITHREAD = "true" ]] && echo -e "$(tput setaf 2)Building $1... $(tput sgr0)"
-    $DOCKER_PREFIX west build -d "build/$BUILD_DIR" -b $1 $WEST_OPTS \
-        -- -DZMK_CONFIG="$CONFIG_DIR" -Wno-dev > "$LOGFILE" 2>&1
+    $DOCKER_PREFIX west build -d "build/$BUILD_DIR" -b $board $WEST_OPTS \
+        -- -DZMK_CONFIG="$CONFIG_DIR" $shield  -Wno-dev > "$LOGFILE" 2>&1
     if [[ $? -eq 0 ]]
     then
         [[ $MULTITHREAD = "true" ]] || echo "$(tput setaf 2)done$(tput sgr0)"
@@ -144,7 +175,7 @@ compile_board () {
         else
             TYPE="bin"
         fi
-        OUTPUT="$OUTPUT_DIR/$1-zmk.$TYPE"
+        OUTPUT="$OUTPUT_DIR/$board-$shield-zmk.$TYPE"
         [[ -f $OUTPUT ]] && [[ ! -L $OUTPUT ]] && mv "$OUTPUT" "$OUTPUT.bak"
         cp "$HOST_ZMK_DIR/app/build/$BUILD_DIR/zephyr/zmk.$TYPE" "$OUTPUT"
     else
@@ -157,11 +188,10 @@ compile_board () {
 cd "$HOST_ZMK_DIR/app"
 if [[ $MULTITHREAD = "true" ]]; then
     i=1
-    for board in $(echo $BOARDS | sed 's/,/ /g')
-    do
-        compile_board $board &
+    echo "$to_build" | jq -c '.' | while read -r line; do
+        compile_board $line &
         eval "T${i}=\${!}"
-        eval "B${i}=\$board"  # Store the board name in a corresponding variable
+        eval "B${i}=\$line"  # Store the board name in a corresponding variable
         ((i++))
     done
 
@@ -174,8 +204,7 @@ if [[ $MULTITHREAD = "true" ]]; then
         echo -e "$(tput setaf 3)Thread $x with PID ${!pid} has finished: ${!board}$(tput sgr0)"
     done
 else
-    for board in $(echo $BOARDS | sed 's/,/ /g')
-    do
-        compile_board $board
+    echo "$to_build" | jq -c '.' | while read -r line; do
+        compile_board $line
     done
 fi
