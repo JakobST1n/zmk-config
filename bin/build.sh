@@ -157,14 +157,14 @@ CONFIG_DIR="$DOCKER_CONFIG_DIR/config"
 compile_board () {
     board=$(echo "$1" | jq -r '.board')
     shield=$(echo "$1" | jq -r '.shield // ""')
-    [[ -z $shield ]] && shield="" || shield="-DSHIELD=${shield}"
+    [[ -z $shield ]] && shield_opts="" || shield_opts="-DSHIELD=${shield}"
 
     BUILD_DIR="${board}_${shield}_$SUFFIX"
     LOGFILE="$LOG_DIR/zmk_build_$board_$shield.log"
     [[ $MULTITHREAD = "true" ]] || echo -en "\n$(tput setaf 2)Building $1... $(tput sgr0)"
     [[ $MULTITHREAD = "true" ]] && echo -e "$(tput setaf 2)Building $1... $(tput sgr0)"
     $DOCKER_PREFIX west build -d "build/$BUILD_DIR" -b $board $WEST_OPTS \
-        -- -DZMK_CONFIG="$CONFIG_DIR" $shield  -Wno-dev > "$LOGFILE" 2>&1
+        -- -DZMK_CONFIG="$CONFIG_DIR" $shield_opts  -Wno-dev > "$LOGFILE" 2>&1
     if [[ $? -eq 0 ]]
     then
         [[ $MULTITHREAD = "true" ]] || echo "$(tput setaf 2)done$(tput sgr0)"
