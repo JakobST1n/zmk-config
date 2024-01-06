@@ -8,6 +8,7 @@
 #include <behaviors.dtsi>
 #include <dt-bindings/zmk/keys.h>
 #include <dt-bindings/zmk/bt.h>
+#include <dt-bindings/zmk/outputs.h>
 
 #include "../utils/keypos_42keys.h"
 
@@ -43,6 +44,13 @@ COMBO(lnx_ao_comb, K_A K_O, DEFAULT, &lnx_no_ao)
                 tapping-term-ms = <200>;
                 bindings = <&kp LALT>, <&kp RALT>;
             };
+            td_esc: td_esc {
+                compatible = "zmk,behavior-tap-dance";
+                label = "td_esc";
+                #binding-cells = <0>;
+                tapping-term-ms = <200>;
+                bindings = <&mt LCTRL ESC>, <&mo SUPER>;
+            };
         };
         keymap {
                 compatible = "zmk,keymap";
@@ -58,7 +66,7 @@ COMBO(lnx_ao_comb, K_A K_O, DEFAULT, &lnx_no_ao)
    XXX      &kp Q &kp W &kp E &kp R &kp T   &kp Y &kp U  &kp I     &kp O   &kp P    XXX
    &td_alt  &kp A &kp S &kp D &kp F &kp G   &kp H &kp J  &kp K     &kp L   &kp SEMI &kp SQT
    &kp LGUI &kp Z &kp X &kp C &kp V &kp B   &kp N &kp M  &kp COMMA &kp DOT &kp FSLH XXX
-                      &kp TAB &kp_mo RAISE RET &kp LSHIFT &kp BSPC &kp_mo LOWER SPACE &mt LCTRL ESC
+                      &kp TAB &kp_mo RAISE RET &kp LSHIFT &kp BSPC &kp_mo LOWER SPACE &td_esc
                         >;
                 };
                 lower_layer {
@@ -91,15 +99,15 @@ COMBO(lnx_ao_comb, K_A K_O, DEFAULT, &lnx_no_ao)
                 };
                 super {
 // ----------------------------------------------------------------------------------------
-// |      |     |     |     |     |         |   |         |      |     |     |     |      |
-// | BTCLR| BT1 | BT2 | BT3 | BT4 |   BT5   |   |         |      |     |     |     |      |
-// |      |     |     |     |     |         |   |         |      |     |     |     |      |
-//                    |     |     |         |   |         |      |     |
+// | OUTTG |     |     |     |     |         |   |         |       |       |      |     |      |
+// | BTCLR | BT1 | BT2 | BT3 | BT4 |   BT5   |   |         | VOLDN | VOLUP | MUTE |     |      |
+// |       |     |     |     |     |         |   |         |       |       |      |     |      |
+//                    |     |     |         |   |         |       |     |
                         label = "Super";
                         bindings = <
-    ___        ___          ___          ___          ___          ___          ___ ___ ___ ___ ___ ___
-    &bt BT_CLR &bt BT_SEL 0 &bt BT_SEL 1 &bt BT_SEL 2 &bt BT_SEL 3 &bt BT_SEL 4 ___ ___ ___ ___ ___ ___
-    ___        ___          ___          ___          ___          ___          ___ ___ ___ ___ ___ ___
+    &out OUT_TOG ___          ___          ___          ___          ___          ___ ___          ___          ___ ___ ___
+    &bt BT_CLR   &bt BT_SEL 0 &bt BT_SEL 1 &bt BT_SEL 2 &bt BT_SEL 3 &bt BT_SEL 4 ___ &kp C_VOL_DN &kp C_VOL_UP &kp C_MUTE ___ ___
+    ___          ___          ___          ___          ___          ___          ___ ___          ___          ___ ___ ___
                                   ___ ___ ___      ___  ___ ___
                         >;
                 };
