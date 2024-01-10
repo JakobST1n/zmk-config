@@ -9,7 +9,7 @@
 #define K_O 23
 #define K_A 28
 
-#include "common.h"
+#include "utils/common.h"
 
 #define DEFAULT 0
 #define RAISE   1

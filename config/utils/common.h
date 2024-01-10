@@ -25,6 +25,6 @@
 };
 
 
-#include "../utils/homerow.h"
-#include "../utils/unicode.h"
+#include "homerow.h"
+#include "unicode.h"
 
