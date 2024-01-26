@@ -90,7 +90,7 @@ while [[ $# -gt 0 ]]; do
 done
 
 # Set defaults
-[[ -z $ZEPHYR_VERSION ]] && ZEPHYR_VERSION="3.2"
+[[ -z $ZEPHYR_VERSION ]] && ZEPHYR_VERSION="3.5-branch"
 
 [[ -z $OUTPUT_DIR ]] && OUTPUT_DIR="$HOME/Downloads"
 [[ -z $LOG_DIR ]] && LOG_DIR="/tmp"

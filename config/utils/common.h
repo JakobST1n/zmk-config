@@ -2,7 +2,7 @@
 #define XXX &none
 
 #ifndef QUICK_TAP_MS
-  #define QUICK_TAP_MS 175
+  #define QUICK_TAP_MS 172
 #endif
 
 #define ZMK_HELPER_STRINGIFY(x) #x
@@ -22,6 +22,33 @@
     flavor = "balanced";
     tapping-term-ms = <200>;
     quick-tap-ms = <QUICK_TAP_MS>;
+};
+
+
+// Some general behaviours that are slightly tweaked from the core
+/ {
+    behaviours {
+        kp_mo: behavior_kp_mo {
+	    compatible = "zmk,behavior-hold-tap";
+	    label = "kp_mo";
+	    #binding-cells = <2>;
+	    flavor = "tap-preferred";
+	    tapping-term-ms = <200>;
+	    quick-tap-ms = <200>;
+	    require-prior-idle-ms = <140>;
+	    bindings = <&mo>, <&kp>;
+	};
+	kp_mt: behavior_kp_mt {
+	    compatible = "zmk,behavior-hold-tap";
+	    label = "kp_mt";
+	    #binding-cells = <2>;
+	    flavor = "tap-preferred";
+	    tapping-term-ms = <QUICK_TAP_MS>;
+	    quick-tap-ms = <QUICK_TAP_MS>;
+	    //require-prior-idle-ms = <100>;
+	    bindings = <&kp>, <&kp>;
+	};
+      };
 };
 
 
