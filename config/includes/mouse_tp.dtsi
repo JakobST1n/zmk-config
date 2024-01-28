@@ -70,7 +70,7 @@
   &mouse_ps2 {
     // Enables scroll wheel on mouse devices supporting the Intellimouse
     // extension.
-    // scroll-mode;
+    scroll-mode;
 
 
     // Disables clicking. Useful when using a PS2 driver that is prone to
@@ -135,7 +135,7 @@
 
     // How long to wait, after the last mouse movement, before deactivating
     // the layer (Default: 250)
-    layer-toggle-timeout-ms = <250>;
+    layer-toggle-timeout-ms = <1000>;
   };
 
 
