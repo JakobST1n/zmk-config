@@ -10,7 +10,7 @@
 #include <dt-bindings/zmk/bt.h>
 #include <dt-bindings/zmk/outputs.h>
 
-#include "utils/keypos_42keys.h"
+#include "includes/keypos_42keys.h"
 
 #define K_E LT2
 #define K_O RT3
@@ -21,8 +21,9 @@
 #define RAISE   2
 #define SUPER   3
 #define MOUSE_TP 4
+#define MOUSE 5
 
-#include "utils/common.h"
+#include "includes/common.h"
 
 #define HAS_MOUSE_KEYS
 #define HAS_MOUSE_TP
@@ -59,10 +60,10 @@ COMBO(lnx_ao_comb, K_A K_O, DEFAULT, &lnx_no_ao)
 //                        | TAB |SHIFT| ENT/RSE |   | SPC/LWR | BKSP | CTRL/ESC |
                         label = "Base";
                         bindings = <
-   XXX      &kp Q &kp W &kp E &kp R &kp T   &kp Y &kp U  &kp I     &kp O   &kp P    XXX
+   XXX      &kp Q &kp W &kp E &kp R &kp T   &kp Y &kp U  &kp I     &kp O   &kp P    &tog MOUSE
    &td_alt  &kp A &kp S &kp D &kp F &kp G   &kp H &kp J  &kp K     &kp L   &kp SEMI &kp SQT
    &kp LGUI &kp Z &kp X &kp C &kp V &kp B   &kp N &kp M  &kp COMMA &kp DOT &kp FSLH &mo SUPER
-                      &mt LCTRL TAB &kp_mo RAISE RET &kp LSHIFT &kp_mt LSHIFT BSPC &kp_mo LOWER SPACE &mt LCTRL ESC
+                      &mt LCTRL TAB &kp_mo_hold RAISE RET &kp LSHIFT &kp_mt LSHIFT BSPC &kp_mo_tap LOWER SPACE &mt LCTRL ESC
                         >;
                 };
                 lower_layer {
@@ -73,9 +74,9 @@ COMBO(lnx_ao_comb, K_A K_O, DEFAULT, &lnx_no_ao)
 //                    |     |     |         |   |         |      |     |
                         label = "Lower";
                         bindings = <
-   &kp GRAVE &kp N1 &kp N2 &kp N3 &kp N4 &kp N5 &kp N6   &kp N7    &kp N8    &kp N9    &kp N0 &kp BSPC
-   ___       ___    ___    ___    ___    ___    &kp LEFT &kp DOWN  &kp UP    &kp RIGHT ___    ___
-   &kp LGUI  ___    ___    ___    ___    ___    &kp HOME &kp PG_DN &kp PG_UP &kp END   ___    ___
+   &kp GRAVE &kp N1 &kp N2 &kp N3       &kp N4          &kp N5 &kp N6   &kp N7    &kp N8    &kp N9    &kp N0 &kp BSPC
+   ___       ___    ___    &msc SCRL_UP &msc SCRL_DOWN  ___    &kp LEFT &kp DOWN  &kp UP    &kp RIGHT ___    ___
+   &kp LGUI  ___    ___    ___        ___               ___    &kp HOME &kp PG_DN &kp PG_UP &kp END   ___    ___
                                   ___ ___ ___      ___  ___ ___
                         >;
                 };
@@ -101,9 +102,9 @@ COMBO(lnx_ao_comb, K_A K_O, DEFAULT, &lnx_no_ao)
 //                     |     |     |         |   |         |       |     |
                         label = "Super";
                         bindings = <
-    &out OUT_TOG ___          ___          ___          ___          ___          ___ ___          ___          ___ ___ ___
+    &out OUT_TOG ___          ___          ___          ___          ___          ___ ___          ___          ___        ___ ___
     &bt BT_CLR   &bt BT_SEL 0 &bt BT_SEL 1 &bt BT_SEL 2 &bt BT_SEL 3 &bt BT_SEL 4 ___ &kp C_VOL_DN &kp C_VOL_UP &kp C_MUTE ___ ___
-    ___          ___          ___          ___          ___          ___          ___ ___          ___          ___ ___ ___
+    ___          ___          ___          ___          ___          ___          ___ ___          ___          ___        ___ ___
                                   ___ ___ ___      ___  ___ ___
                         >;
                 };
@@ -115,10 +116,24 @@ COMBO(lnx_ao_comb, K_A K_O, DEFAULT, &lnx_no_ao)
 //                     |     |     |         |   |         |       |     |
                         label = "TP";
                         bindings = <
-    ___ ___ ___ ___ ___ &mms MS_TP_SENSITIVITY_INCR &mkp RCLK ___ ___ ___ ___ ___
-    ___ ___ ___ ___ ___ &mms MS_TP_SENSITIVITY_DECR ___ ___ ___ ___ ___ ___
-    ___ ___ ___ ___ ___ ___ ___ ___ ___ ___ ___ ___
-              ___ ___ ___      &mkp LCLK  &mkp MCLK ___
+    ___ ___ ___ ___ ___ ___ &mkp MCLK &mkp RCLK ___ ___ ___ ___
+    ___ ___ ___ ___ ___ ___ ___       ___       ___ ___ ___ ___
+    ___ ___ ___ ___ ___ ___ ___       ___       ___ ___ ___ ___
+              ___ ___ ___      &mkp LCLK  ___ ___
+                        >;
+                };
+                MOUSE {
+// ----------------------------------------------------------------------------------------
+// |       |     |     |     |     |         |   |         |       |       |      |     |      |
+// |       |     |     |     |     |         |   |         |       |       |      |     |      |
+// |       |     |     |     |     |         |   |         |       |       |      |     |      |
+//                     |     |     |         |   |         |       |     |
+                        label = "Mouse";
+                        bindings = <
+    ___ ___ ___ ___ ___ &mms MS_TP_SENSITIVITY_INCR &mkp MCLK      &mkp RCLK ___ ___ ___ ___
+    ___ ___ ___ ___ ___ &mms MS_TP_SENSITIVITY_DECR &msc SCRL_UP   ___       ___ ___ ___ ___
+    ___ ___ ___ ___ ___ ___                         &msc SCRL_DOWN ___       ___ ___ ___ ___
+              ___ ___ ___      &mkp LCLK  ___ ___
                         >;
                 };
         };

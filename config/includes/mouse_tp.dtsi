@@ -94,7 +94,7 @@
 
 
     // How sensitive the TP is (Default: 128)
-    tp-sensitivity = <135>;
+    tp-sensitivity = <205>;
 
 
     // The maximum mouse movement speed the TP will accelarate to (Default: 97)
@@ -135,7 +135,7 @@
 
     // How long to wait, after the last mouse movement, before deactivating
     // the layer (Default: 250)
-    layer-toggle-timeout-ms = <1000>;
+    layer-toggle-timeout-ms = <425>;
   };
 
 
