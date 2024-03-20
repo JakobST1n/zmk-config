@@ -3,7 +3,7 @@
  *
  * SPDX-License-Identifier: MIT
  */
- // https://caksoylar.github.io/keymap-drawer?keymap_yaml=H4sIAAAAAAAC_5WU23aTQBSG7_sU43hWGkNOLbhcS5qQtopGc7DWNCJNpk1WCCCQVbMivo0-g_e-mPPDdGxOrb3Il-GfvX82eza4zsyfxvoWIV8nY3vMZqe-Ew500vdDj9mhHzsxG4hdN4sllnHc6LTtKHBHsV38VrGLW3yLhRFsambd6FhtLAnZJl1v6roKoe8pxxFgAk2gDRwDHeAQaADvOJDXuzShluHG2DGAFlAD6sA-cAC8Al4DFvAceEivuOxPR9A-AR-BKvAB2APeAm8ABcgBz1aKaRsInvNOmF7MQoUMdf5EzihiNFFIazg6i2EYOH0m4lpYZ3GWf8FCxM35lVWNQ94dOLWqCe5gNY7MpmwecukXbhLx_x9pFhRVKHekUhDKS6kUhXJXKiWh3JNKWSj3pVIRymep7AjlgVR2hfJEKppQHkklL5THUBa6l83D9aQWO0uPu-ZfeOl8BOnQjM6HMb0aejvXA3_C0vE6JwNhzJfT1Nv0Buud08fJTjyeBUwnceh4UbLh_NcFiYFY3ZAjsryVXtIhcwdrB2UxAZU2jcOWufTK1TX-U_OAChSu6UwXLejRtU2tlxVC6hVgB9iVWdvIegGcnIBzINngoiK3ABSBknSxkfUU-E5Xi_ufc1hq16aW0xpzN72PK6Y39bzvT0799IO3TeaBTroqf6xiTyFj7vnnFzd0uUjF15DyDYcn-4FCfJ3kczzYCft21HdcbqrmCpXkn5WWOWVWv29nlc9ppWSxKu2yqp83WWlLVeXLyV_cwd0WIAYAAA%3D%3D
+// https://caksoylar.github.io/keymap-drawer?keymap_yaml=H4sIAAAAAAAC_5WUa3OTQBSGv_dXrOulXkiE3FpwnJE0YKvRaC7WmkSkYW0yISwFMjUT47_R3-B3_5j7QkJza7QfeOZlz553z57D4NoTPo60PUIuR0NryCbn3A4cjfR44DEr4JEdMWcedZO9pKqf1VpNK_TdQWTlv5Ws_J4IsSCETcUw9Va1CUlIhrS9setKhL6nAqeAAdSBJnAGtIAToAa8E0Bed81ER7ABVAATeAkcA6-A10AVeAbs03WPT1j-CBwBH4Ay8BZ4A0hAFni6vZCpaILhRSyQSF8Tl7EHIaMziTT6g69REqZl3-4xmmyI17EBkQYCyXqVX7EA64szqrVTo65tHkaVRTbNpSqfqkKqiqkqpeogVYepUlMlL5-_dOy8XffRhsfAZ-Be3F4mboMh8Csvnp4fj3Rw0Y_oIvFmxxfYfBe4AzyI58dHLB78BXHmpkKOY1_Dc3a5bp2FRKKJzzQSBbYXLvqeDGczsGVUm9viV9pnrrPcr7p-0jDW5mWq4lFkQAFyEiG0Q3GVTgd8CDwCvgNftn9jZlHkmSXgADiEzT4SMhRyCjkDngA_bnBRkIsSzDxQSMdgxS5t5HaB57ubvHr_3f2sMPe_Pvz15OTgHh-d8_hXkiFTXyNtRVSe70pkKBL__BJZrlik8_8MFQFbWHBfIlwjclZstoOeFfZsV1gr2Vxpdm2lJk6J1e_bWclZtTBbrUpdVPXzX1bqWlVycckqd30_o3G03Wo0cBKr1ZqWCxKzVYpzn6Zevp3PX_cUDTAIBgAA
 
 #include <behaviors.dtsi>
 #include <dt-bindings/zmk/keys.h>
@@ -16,12 +16,16 @@
 #define K_O RT3
 #define K_A LM4
 
-#define DEFAULT 0
-#define LOWER   1
-#define RAISE   2
-#define SUPER   3
+#define KEYS_L LT0 LT1 LT2 LT3 LT4 LT5 LM0 LM1 LM2 LM3 LM4 LM5 LB0 LB1 LB2 LB3 LB4 LB5 // left hand
+#define KEYS_R RT0 RT1 RT2 RT3 RT4 RT5 RM0 RM1 RM2 RM3 RM4 RM5 RB0 RB1 RB2 RB3 RB4 RB5 // right hand
+#define THUMBS LH2 LH1 LH0 RH0 RH1 RH2                                                 // thumbs
+
+#define DEFAULT  0
+#define LOWER    1
+#define RAISE    2
+#define SUPER    3
 #define MOUSE_TP 4
-#define MOUSE 5
+#define MOUSE    5
 
 #include "includes/common.h"
 
@@ -39,67 +43,66 @@ COMBO(lnx_oe_comb, K_O K_E, DEFAULT, &lnx_no_oe)
 COMBO(lnx_ae_comb, K_A K_E, DEFAULT, &lnx_no_ae)
 COMBO(lnx_ao_comb, K_A K_O, DEFAULT, &lnx_no_ao)
 
+COMBO(esc_comb, LT3 LT2, DEFAULT, &kp ESC)
+COMBO(tab_comb, LM3 LM2, DEFAULT, &kp TAB)
+
+// 1 2 3 4 5 6 7 8
+// ! @ # $ % ^ & *
+// '
+// "
+
 / {
-        behaviors {
-            td_alt: td_alt {
-                compatible = "zmk,behavior-tap-dance";
-                label = "td_alt";
-                #binding-cells = <0>;
-                tapping-term-ms = <QUICK_TAP_MS>;
-                bindings = <&kp LALT>, <&kp RALT>;
-            };
-        };
         keymap {
                 compatible = "zmk,keymap";
 
                 default_layer {
-// ----------------------------------------------------------------------------------------
-// |     |  Q  |  W  |  E  |  R  |    T    |   |    Y    |  U   |  I  |  O  |  P  |       |
-// | ALT |  A  |  S  |  D  |  F  |    G    |   |    H    |  J   |  K  |  L  |  ;  |  '    |
-// | GUI |  Z  |  X  |  C  |  V  |    B    |   |    N    |  M   |  ,  |  .  |  /  | SUPER |
-//                        | TAB |SHIFT| ENT/RSE |   | SPC/LWR | BKSP | CTRL/ESC |
+// --------------------------------------------------------------------------------------------
+// |     |  Q  |  W  |  E  |   R   |    T    |   |     Y    |  U    |  I  |  O  |  P  | MOUSE |
+// |     |  A  |  S  |  D  |   F   |    G    |   |     H    |  J    |  K  |  L  |  ;  |  '    |
+// |     |  Z  |  X  |  C  |   V   |    B    |   |     N    |  M    |  ,  |  .  |  /  | SUPER |
+//                   |     |ENT/RSE|  SHIFT  |   | SHFT/BKSP|LWR/SPC|     |
                         label = "Base";
                         bindings = <
-   XXX      &kp Q &kp W &kp E &kp R &kp T   &kp Y &kp U  &kp I     &kp O   &kp P    &tog MOUSE
-   &td_alt  &kp A &kp S &kp D &kp F &kp G   &kp H &kp J  &kp K     &kp L   &kp SEMI &kp SQT
-   &kp LGUI &kp Z &kp X &kp C &kp V &kp B   &kp N &kp M  &kp COMMA &kp DOT &kp FSLH &mo SUPER
-                      &mt LCTRL TAB &kp_mo_hold RAISE RET &kp LSHIFT &kp_mt LSHIFT BSPC &kp_mo_tap LOWER SPACE &mt LCTRL ESC
+   XXX &kp Q &kp W       &kp E       &kp R        &kp T  &kp Y &kp U        &kp I        &kp O       &kp P    &tog MOUSE
+   XXX &kp A &hml LGUI S &hml LALT D &hml LCTRL F &kp G  &kp H &hmr LCTRL J &hmr LALT K  &hmr LGUI L &kp SEMI &kp SQT
+   XXX &kp Z &kp X       &kp C       &kp V        &kp B  &kp N &kp M        &kp COMMA    &kp DOT     &kp FSLH &mo SUPER
+                      XXX &kp_mo_hold RAISE RET &kp LSHIFT &kp_mt LSHIFT BSPC &kp_mo_tap LOWER SPACE XXX
                         >;
                 };
                 lower_layer {
 // ----------------------------------------------------------------------------------------
 // |      |  1  |  2  |  3  |  4  |    5    |   |    6    |  7   |  8  |  9  |  0  |      |
-// |      |     |     |     |     |         |   |   LFT   | DWN  |  UP | RGT |     |      |
-// |      |     |     |     |     |         |   |   HME   | P_D  | P_U | END |     |      |
+// |      |     |  %  |  *  |  ^  |    $    |   |   LFT   | DWN  |  UP | RGT |     |      |
+// |      |     |  @  |  #  |  !  |    &    |   |   HME   | P_D  | P_U | END |     |      |
 //                    |     |     |         |   |         |      |     |
                         label = "Lower";
                         bindings = <
-   &kp GRAVE &kp N1 &kp N2 &kp N3       &kp N4          &kp N5 &kp N6   &kp N7    &kp N8    &kp N9    &kp N0 &kp BSPC
-   ___       ___    ___    &msc SCRL_UP &msc SCRL_DOWN  ___    &kp LEFT &kp DOWN  &kp UP    &kp RIGHT ___    ___
-   &kp LGUI  ___    ___    ___        ___               ___    &kp HOME &kp PG_DN &kp PG_UP &kp END   ___    ___
+   ___ &kp N1 &kp N2    &kp N3   &kp N4    &kp N5   &kp N6   &kp N7    &kp N8    &kp N9    &kp N0 ___
+   ___ ___    &kp PRCNT &kp STAR &kp CARET &kp DLLR &kp LEFT &kp DOWN  &kp UP    &kp RIGHT ___    ___
+   ___ ___    &kp AT    &kp HASH &kp EXCL  &kp AMPS &kp HOME &kp PG_DN &kp PG_UP &kp END   ___    ___
                                   ___ ___ ___      ___  ___ ___
                         >;
                 };
                 raise_layer {
 // ---------------------------------------------------------------------------------------
-// |      | F9  | F10 | F11 | F12 |         |   |         |     |     |  [  |  ]  |      |
-// |      | F5  | F6  |  F7 | F8  |         |   |    -    |  =  |  \  |  {  |  }  |      |
-// |      | F1  | F2  |  F3 | F4  |         |   |    _    |  +  |  |  |     |     |      |
+// |      | F9  | F10 | F11 | F12 |    "    |   |    \    |  (  |  )  |  |  |  `  |      |
+// |      | F5  | F6  |  F7 | F8  |    '    |   |    -    |  {  |  }  |  +  |  ~  |      |
+// |      | F1  | F2  |  F3 | F4  |         |   |    _    |  [  |  ]  |  =  |     |      |
 //                    |     |     |         |   |         |     |     |
                         label = "Raise";
                         bindings = <
-   ___ &kp F9 &kp F10 &kp F11 &kp F12 ___ ___       ___       ___      &kp LBKT &kp RBKT ___
-   ___ &kp F5 &kp F6  &kp F7  &kp F8  ___ &kp MINUS &kp EQUAL &kp BSLH &kp LBRC &kp RBRC ___
-   ___ &kp F1 &kp F2  &kp F3  &kp F4  ___ &kp UNDER &kp PLUS  &kp PIPE ___      ___      ___
-                                  ___ ___ ___      &kp DEL  ___ ___
+   ___ &kp F9 &kp F10 &kp F11 &kp F12 &kp DQT &kp BSLH  &kp LPAR &kp RPAR &kp PIPE  &kp GRAVE ___
+   ___ &kp F5 &kp F6  &kp F7  &kp F8  &kp SQT &kp MINUS &kp LBRC &kp RBRC &kp PLUS  &kp TILDE ___
+   ___ &kp F1 &kp F2  &kp F3  &kp F4  ___     &kp UNDER &kp LBKT &kp RBKT &kp EQUAL ___       ___
+                                  ___ ___ ___      &kp_mt LSHIFT DEL  ___ ___
                         >;
                 };
                 super {
-// ----------------------------------------------------------------------------------------
+// ---------------------------------------------------------------------------------------------
 // | OUTTG |     |     |     |     |         |   |         |       |       |      |     |      |
 // | BTCLR | BT1 | BT2 | BT3 | BT4 |   BT5   |   |         | VOLDN | VOLUP | MUTE |     |      |
 // |       |     |     |     |     |         |   |         |       |       |      |     |      |
-//                     |     |     |         |   |         |       |     |
+//                     |     |     |         |   |         |       |       |
                         label = "Super";
                         bindings = <
     &out OUT_TOG ___          ___          ___          ___          ___          ___ ___          ___          ___        ___ ___
@@ -109,31 +112,31 @@ COMBO(lnx_ao_comb, K_A K_O, DEFAULT, &lnx_no_ao)
                         >;
                 };
                 MouseTP_layer {
-// ----------------------------------------------------------------------------------------
+// ---------------------------------------------------------------------------------------------
 // |       |     |     |     |     |         |   |         |       |       |      |     |      |
 // |       |     |     |     |     |         |   |         |       |       |      |     |      |
 // |       |     |     |     |     |         |   |         |       |       |      |     |      |
-//                     |     |     |         |   |         |       |     |
+//                     |     |     |         |   |         |       |       |
                         label = "TP";
                         bindings = <
-    ___ ___ ___ ___ ___ ___ &mkp MCLK &mkp RCLK ___ ___ ___ ___
-    ___ ___ ___ ___ ___ ___ ___       ___       ___ ___ ___ ___
-    ___ ___ ___ ___ ___ ___ ___       ___       ___ ___ ___ ___
-              ___ ___ ___      &mkp LCLK  ___ ___
+    XXX XXX XXX XXX XXX XXX &mkp MCLK &mkp RCLK XXX XXX XXX ___
+    XXX XXX XXX XXX XXX XXX XXX       XXX       XXX XXX XXX XXX
+    XXX XXX XXX XXX XXX XXX XXX       XXX       XXX XXX XXX XXX
+              XXX XXX XXX      &mkp LCLK  XXX XXX
                         >;
                 };
                 MOUSE {
-// ----------------------------------------------------------------------------------------
+// ---------------------------------------------------------------------------------------------
 // |       |     |     |     |     |         |   |         |       |       |      |     |      |
 // |       |     |     |     |     |         |   |         |       |       |      |     |      |
 // |       |     |     |     |     |         |   |         |       |       |      |     |      |
-//                     |     |     |         |   |         |       |     |
+//                     |     |     |         |   |         |       |       |
                         label = "Mouse";
                         bindings = <
-    ___ ___ ___ ___ ___ &mms MS_TP_SENSITIVITY_INCR &mkp MCLK      &mkp RCLK ___ ___ ___ ___
-    ___ ___ ___ ___ ___ &mms MS_TP_SENSITIVITY_DECR &msc SCRL_UP   ___       ___ ___ ___ ___
-    ___ ___ ___ ___ ___ ___                         &msc SCRL_DOWN ___       ___ ___ ___ ___
-              ___ ___ ___      &mkp LCLK  ___ ___
+    XXX XXX XXX XXX XXX &mms MS_TP_SENSITIVITY_INCR &mkp MCLK      &mkp RCLK XXX XXX XXX ___
+    XXX XXX XXX XXX XXX &mms MS_TP_SENSITIVITY_DECR &msc SCRL_UP   XXX       XXX XXX XXX XXX
+    XXX XXX XXX XXX XXX XXX                         &msc SCRL_DOWN XXX       XXX XXX XXX XXX
+              XXX XXX XXX      &mkp LCLK  XXX XXX
                         >;
                 };
         };
