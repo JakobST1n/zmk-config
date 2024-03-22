@@ -3,7 +3,7 @@
  *
  * SPDX-License-Identifier: MIT
  */
-// https://caksoylar.github.io/keymap-drawer?keymap_yaml=H4sIAAAAAAAC_5WUa3OTQBSGv_dXrOulXkiE3FpwnJE0YKvRaC7WmkSkYW0yISwFMjUT47_R3-B3_5j7QkJza7QfeOZlz553z57D4NoTPo60PUIuR0NryCbn3A4cjfR44DEr4JEdMWcedZO9pKqf1VpNK_TdQWTlv5Ws_J4IsSCETcUw9Va1CUlIhrS9setKhL6nAqeAAdSBJnAGtIAToAa8E0Bed81ER7ABVAATeAkcA6-A10AVeAbs03WPT1j-CBwBH4Ay8BZ4A0hAFni6vZCpaILhRSyQSF8Tl7EHIaMziTT6g69REqZl3-4xmmyI17EBkQYCyXqVX7EA64szqrVTo65tHkaVRTbNpSqfqkKqiqkqpeogVYepUlMlL5-_dOy8XffRhsfAZ-Be3F4mboMh8Csvnp4fj3Rw0Y_oIvFmxxfYfBe4AzyI58dHLB78BXHmpkKOY1_Dc3a5bp2FRKKJzzQSBbYXLvqeDGczsGVUm9viV9pnrrPcr7p-0jDW5mWq4lFkQAFyEiG0Q3GVTgd8CDwCvgNftn9jZlHkmSXgADiEzT4SMhRyCjkDngA_bnBRkIsSzDxQSMdgxS5t5HaB57ubvHr_3f2sMPe_Pvz15OTgHh-d8_hXkiFTXyNtRVSe70pkKBL__BJZrlik8_8MFQFbWHBfIlwjclZstoOeFfZsV1gr2Vxpdm2lJk6J1e_bWclZtTBbrUpdVPXzX1bqWlVycckqd30_o3G03Wo0cBKr1ZqWCxKzVYpzn6Zevp3PX_cUDTAIBgAA
+// https://caksoylar.github.io/keymap-drawer?keymap_yaml=H4sIAAAAAAAC_5WU23bSQBSG7_sU43ioh4CEU5u4XMsASUVRlIO1AsaUTAuLkMQQVmUhvo0-g_e-mPPnVAgU7QVffvZk_3vP7FmxjIUz9-UDQr5OJ_qELc4dwzNlMnQ8m-me4xs-M6NVK3yXNJSzZrejz1xr7OuFb2W9cMCXmDeDTU3VlG6jA0lIhvTsuWUJhL6nHKeACrSADnAGdIE60ATecSBvkDJReHzJG6BtLkb8edKt01UUq0UxxfKTmBbFqr5nIUhPYP8ytnmVWg6Cr3f4NDbr0WewOaTp_j4h_BGoAh-ACvAWeAMIQBZ4unuTqKfaPvPCii1jPGOo2R6NL_yonYprDFnUUhCPG21jIYw3nCvmIR7XaDRP1Za8XYyKyTbziSokqpioUqLKiTpK1HGipETl1uuvlY2O6z6O4THwGbgHNBjfDX_WnCs7uBlucF3GlyOfxok3O77Ay3eBO8CDYNrOlAWX6pKYkSmX88BXtc19rjtnIRB_4TKZ-J5hz-JzD4ezvbBjVNuvBX_piFnm-nm1lHpbTc1Lk_hPzAEikBcIoX2KrfT74EPgEfAd-LL7jmklnqeVgSPgGDaHSMhQyCXkCngC_LjBRUQuWtAKQDEZgx649JA7AJ7vP-TN_e8_zxqz_uvip5PDwkNneu4En6kMWboy6Ym888JAIBOe-OcXz7J4kEbfMMoXDG7huAJxZJLL8pcNb6jPhobFrcVsvry6tpJCp9Dq9-2sclmpuNrsSoq7-vkvKynVVa60ZpW_3p_aru62mo7N0Gqzp_WG-GzFUuTTUSq38_kL18AtzmQGAAA%3D
 
 #include <behaviors.dtsi>
 #include <dt-bindings/zmk/keys.h>
@@ -120,9 +120,9 @@ COMBO(tab_comb, LM3 LM2, DEFAULT, &kp TAB)
                         label = "TP";
                         bindings = <
     XXX XXX XXX XXX XXX XXX &mkp MCLK &mkp RCLK XXX XXX XXX ___
+    XXX XXX XXX ___ ___ ___ XXX       XXX       XXX XXX XXX XXX
     XXX XXX XXX XXX XXX XXX XXX       XXX       XXX XXX XXX XXX
-    XXX XXX XXX XXX XXX XXX XXX       XXX       XXX XXX XXX XXX
-              XXX XXX XXX      &mkp LCLK  XXX XXX
+              ___ ___ ___      &mkp LCLK  ___ ___
                         >;
                 };
                 MOUSE {
@@ -133,10 +133,10 @@ COMBO(tab_comb, LM3 LM2, DEFAULT, &kp TAB)
 //                     |     |     |         |   |         |       |       |
                         label = "Mouse";
                         bindings = <
-    XXX XXX XXX XXX XXX &mms MS_TP_SENSITIVITY_INCR &mkp MCLK      &mkp RCLK XXX XXX XXX ___
-    XXX XXX XXX XXX XXX &mms MS_TP_SENSITIVITY_DECR &msc SCRL_UP   XXX       XXX XXX XXX XXX
-    XXX XXX XXX XXX XXX XXX                         &msc SCRL_DOWN XXX       XXX XXX XXX XXX
-              XXX XXX XXX      &mkp LCLK  XXX XXX
+    &mms MS_TP_SENSITIVITY_INCR XXX XXX XXX XXX XXX  &mkp MCLK      &mkp RCLK XXX XXX XXX ___
+    &mms MS_TP_SENSITIVITY_DECR XXX ___ ___ ___ XXX  &msc SCRL_UP   XXX       XXX XXX XXX XXX
+    XXX                         XXX XXX XXX XXX XXX  &msc SCRL_DOWN XXX       XXX XXX XXX XXX
+              ___ ___ ___      &mkp LCLK  ___ ___
                         >;
                 };
         };
