@@ -33,8 +33,8 @@
 	    label = "kp_mo_tap";
 	    #binding-cells = <2>;
 	    flavor = "tap-preferred";
-	    tapping-term-ms = <200>;
-	    quick-tap-ms = <200>;
+	    tapping-term-ms = <175>;
+	    quick-tap-ms = <175>;
 	    //require-prior-idle-ms = <140>;
 	    bindings = <&mo>, <&kp>;
 	};
@@ -43,8 +43,8 @@
 	    label = "kp_mo_hold";
 	    #binding-cells = <2>;
 	    flavor = "hold-preferred";
-	    tapping-term-ms = <200>;
-	    quick-tap-ms = <200>;
+	    tapping-term-ms = <175>;
+	    quick-tap-ms = <175>;
 	    //require-prior-idle-ms = <140>;
 	    bindings = <&mo>, <&kp>;
 	};

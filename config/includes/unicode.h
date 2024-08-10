@@ -5,7 +5,7 @@
         combos { \
             compatible = "zmk,combos"; \
             name { \
-                timeout-ms = <50>; \
+                timeout-ms = <35>; \
                 key-positions = <POS>; \
                 layers = <LAYERS>; \
                 bindings = <BINDINGS>; \
