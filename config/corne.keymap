@@ -3,7 +3,7 @@
  *
  * SPDX-License-Identifier: MIT
  */
-// https://caksoylar.github.io/keymap-drawer?keymap_yaml=H4sIAAAAAAAC_5WU23bSQBSG7_sU43ioh4CEU5u4XMsASUVRlIO1AsaUTAuLkMQQVmUhvo0-g_e-mPPnVAgU7QVffvZk_3vP7FmxjIUz9-UDQr5OJ_qELc4dwzNlMnQ8m-me4xs-M6NVK3yXNJSzZrejz1xr7OuFb2W9cMCXmDeDTU3VlG6jA0lIhvTsuWUJhL6nHKeACrSADnAGdIE60ATecSBvkDJReHzJG6BtLkb8edKt01UUq0UxxfKTmBbFqr5nIUhPYP8ytnmVWg6Cr3f4NDbr0WewOaTp_j4h_BGoAh-ACvAWeAMIQBZ4unuTqKfaPvPCii1jPGOo2R6NL_yonYprDFnUUhCPG21jIYw3nCvmIR7XaDRP1Za8XYyKyTbziSokqpioUqLKiTpK1HGipETl1uuvlY2O6z6O4THwGbgHNBjfDX_WnCs7uBlucF3GlyOfxok3O77Ay3eBO8CDYNrOlAWX6pKYkSmX88BXtc19rjtnIRB_4TKZ-J5hz-JzD4ezvbBjVNuvBX_piFnm-nm1lHpbTc1Lk_hPzAEikBcIoX2KrfT74EPgEfAd-LL7jmklnqeVgSPgGDaHSMhQyCXkCngC_LjBRUQuWtAKQDEZgx649JA7AJ7vP-TN_e8_zxqz_uvip5PDwkNneu4En6kMWboy6Ym888JAIBOe-OcXz7J4kEbfMMoXDG7huAJxZJLL8pcNb6jPhobFrcVsvry6tpJCp9Dq9-2sclmpuNrsSoq7-vkvKynVVa60ZpW_3p_aru62mo7N0Gqzp_WG-GzFUuTTUSq38_kL18AtzmQGAAA%3D
+// https://caksoylar.github.io/keymap-drawer?keymap_yaml=H4sIAAAAAAAC_5WU7XLSQBSG__cq1vVbg5JSaJtRx1CSikZRPqwVMKbJWhiWBMMylUH8p9fghXgF9sbcdwmRBobRHzx5Obv7nrNnN-HeNJoIY4eQz8OBO2DTs8iLA4P4URwyN46EJ1iQjPLFXOKYp7VW0x2PeF-4hS8lt7Ajh1g8hk3Fss2W04QkJEfa4YRzjdA3VOIEsIA60AROgRZQBWrAa-DyO-1mTEwZn8kCaEOKnnwet6p0nsQqSczkIo3ZSexIxBxBegznZ0ub55lhFXyxwce5mo9e_lQV_lir8D3i74Aj4C1QBl4BLwENeAA8lMC6jAkyWqFg8SJn3euPGbI2ev1PIimoPPJ8lhSl4stSGxhYxJ3ogsWIL3M4tROrbqwno3q60d1UFVK1l6piqkqp2k_VQaoOU5Vfzb_aqEdowE3gHvABuAE4TG5GPivRRaiuxkjdl_55TyTt2mz4BNOeAteBa8AtddrRkKlLdU6CxFPKibK1wmCb6caT0IiYjphBROyF42XXF0ezPrDhoNanqb-0x3iw2q26WW1YmdOyD-VPzwM6sKsRQjsUW-l0wDvAXeAr8BH4_St7Te2iXGeXgH3gADa3MTdHIWeQc-A-8G3zPbV1rEUJdgHYW3aSusqljbVd4PH2Jl_d__Z-Vhj_p2ufXbxI7EfDs0h9pnJkNjJIW1Zf6GpkINdZDbyyXAZp8g2jcsQzyLAfaCQyiGy7F_vu2Pe4NM7P_7rocut6MfFpmuX_8_kDHDRiE4MFAAA%3D
 
 #include <behaviors.dtsi>
 #include <dt-bindings/zmk/keys.h>
@@ -27,29 +27,19 @@
 #define MOUSE_TP 4
 #define MOUSE    5
 
-#include "includes/common.h"
 
-#define HAS_MOUSE_KEYS
-#define HAS_MOUSE_TP
-#ifdef HAS_MOUSE_KEYS
-     #include "includes/mouse_keys.dtsi"
-#endif
+#include "includes/common.h"
 
 #ifdef HAS_MOUSE_TP
      #include "includes/mouse_tp.dtsi"
 #endif
 
-COMBO(lnx_oe_comb, K_O K_E, DEFAULT, &lnx_no_oe)
-COMBO(lnx_ae_comb, K_A K_E, DEFAULT, &lnx_no_ae)
-COMBO(lnx_ao_comb, K_A K_O, DEFAULT, &lnx_no_ao)
+// COMBO(lnx_oe_comb, K_O K_E, DEFAULT, &lnx_no_oe)
+// COMBO(lnx_ae_comb, K_A K_E, DEFAULT, &lnx_no_ae)
+// COMBO(lnx_ao_comb, K_A K_O, DEFAULT, &lnx_no_ao)
 
 COMBO(esc_comb, LT3 LT2, DEFAULT, &kp ESC)
 COMBO(tab_comb, LM3 LM2, DEFAULT, &kp TAB)
-
-// 1 2 3 4 5 6 7 8
-// ! @ # $ % ^ & *
-// '
-// "
 
 / {
         keymap {
@@ -57,43 +47,43 @@ COMBO(tab_comb, LM3 LM2, DEFAULT, &kp TAB)
 
                 default_layer {
 // --------------------------------------------------------------------------------------------
-// |     |  Q  |  W  |  E  |   R   |    T    |   |     Y    |  U    |  I  |  O  |  P  | MOUSE |
-// |     |  A  |  S  |  D  |   F   |    G    |   |     H    |  J    |  K  |  L  |  ;  |  '    |
-// |     |  Z  |  X  |  C  |   V   |    B    |   |     N    |  M    |  ,  |  .  |  /  | SUPER |
+// |     |  Q  |  W  |  E  |   R   |    T    |   |     Y    |  U    |  I  |  O  |  P  |  Å    |
+// |     |  A  |  S  |  D  |   F   |    G    |   |     H    |  J    |  K  |  L  |  Ø  |  Æ    |
+// |     |  Z  |  X  |  C  |   V   |    B    |   |     N    |  M    |  ,  |  .  |  /  | MOUSE |
 //                   |     |ENT/RSE|  SHIFT  |   | SHFT/BKSP|LWR/SPC|     |
                         label = "Base";
                         bindings = <
-   XXX &kp Q &kp W       &kp E       &kp R        &kp T  &kp Y &kp U        &kp I        &kp O       &kp P    &tog MOUSE
-   XXX &kp A &hml LGUI S &hml LALT D &hml LCTRL F &kp G  &kp H &hmr LCTRL J &hmr LALT K  &hmr LGUI L &kp SEMI &kp SQT
-   XXX &kp Z &kp X       &kp C       &kp V        &kp B  &kp N &kp M        &kp COMMA    &kp DOT     &kp FSLH &mo SUPER
+   XXX &kp Q &kp W       &kp E       &kp R        &kp T  &kp Y &kp U        &kp I        &kp O       &kp P       &kp LBKT
+   XXX &kp A &hml LGUI S &hml LALT D &hml LCTRL F &kp G  &kp H &hmr LCTRL J &hmr LALT K  &hmr LGUI L &kp SEMI    &kp SQT
+   XXX &kp Z &kp X       &kp C       &kp V        &kp B  &kp N &kp M        &kp COMMA    &kp DOT     &kp NB_FSLH XXX
                       XXX &kp_mo_hold RAISE RET &kp LSHIFT &kp_mt LSHIFT BSPC &kp_mo_tap LOWER SPACE XXX
                         >;
                 };
                 lower_layer {
 // ----------------------------------------------------------------------------------------
 // |      |  1  |  2  |  3  |  4  |    5    |   |    6    |  7   |  8  |  9  |  0  |      |
-// |      |     |  %  |  *  |  ^  |    $    |   |   LFT   | DWN  |  UP | RGT |     |      |
-// |      |     |  @  |  #  |  !  |    &    |   |   HME   | P_D  | P_U | END |     |      |
+// |      |  <  |  %  |  *  |  ^  |    $    |   |   LFT   | DWN  |  UP | RGT |     |      |
+// |      |  >  |  @  |  #  |  !  |    &    |   |   HME   | P_D  | P_U | END |     |      |
 //                    |     |     |         |   |         |      |     |
-                        label = "Lower";
+                        label = "lower";
                         bindings = <
-   ___ &kp N1 &kp N2    &kp N3   &kp N4    &kp N5   &kp N6   &kp N7    &kp N8    &kp N9    &kp N0 ___
-   ___ ___    &kp PRCNT &kp STAR &kp CARET &kp DLLR &kp LEFT &kp DOWN  &kp UP    &kp RIGHT ___    ___
-   ___ ___    &kp AT    &kp HASH &kp EXCL  &kp AMPS &kp HOME &kp PG_DN &kp PG_UP &kp END   ___    ___
+   ___ &kp N1    &kp N2    &kp N3      &kp N4    &kp N5   &kp N6   &kp N7    &kp N8    &kp N9    &kp N0 ___
+   ___ &kp NB_LT &kp PRCNT &kp NB_STAR &kp NB_CARET &kp NB_DLLR &kp LEFT &kp DOWN  &kp UP    &kp RIGHT ___    ___
+   ___ &kp NB_GT &kp NB_AT &kp HASH    &kp EXCL     &kp NB_AMPS &kp HOME &kp PG_DN &kp PG_UP &kp END   ___    ___
                                   ___ ___ ___      ___  ___ ___
                         >;
                 };
                 raise_layer {
 // ---------------------------------------------------------------------------------------
-// |      | F9  | F10 | F11 | F12 |    "    |   |    \    |  (  |  )  |  |  |  `  |      |
+// |      | F9  | F10 | F11 | F12 |    "    |   |    \    |  (  |  )  |  |  |  `  |  ´   |
 // |      | F5  | F6  |  F7 | F8  |    '    |   |    -    |  {  |  }  |  +  |  ~  |      |
-// |      | F1  | F2  |  F3 | F4  |         |   |    _    |  [  |  ]  |  =  |     |      |
+// |      | F1  | F2  |  F3 | F4  |         |   |    _    |  [  |  ]  |  =  |  ?  |      |
 //                    |     |     |         |   |         |     |     |
                         label = "Raise";
                         bindings = <
-   ___ &kp F9 &kp F10 &kp F11 &kp F12 &kp DQT &kp BSLH  &kp LPAR &kp RPAR &kp PIPE  &kp GRAVE ___
-   ___ &kp F5 &kp F6  &kp F7  &kp F8  &kp SQT &kp MINUS &kp LBRC &kp RBRC &kp PLUS  &kp TILDE ___
-   ___ &kp F1 &kp F2  &kp F3  &kp F4  ___     &kp UNDER &kp LBKT &kp RBKT &kp EQUAL ___       ___
+   ___ &kp F9 &kp F10 &kp F11 &kp F12 &kp NB_DQT &kp NB_BSLH  &kp NB_LPAR &kp NB_RPAR &kp NB_PIPE  &kp NB_LTICK  &kp NB_RTICK
+   ___ &kp F5 &kp F6  &kp F7  &kp F8  &kp NB_SQT &kp NB_MINUS &kp NB_LBRC &kp NB_RBRC &kp NB_PLUS  &kp NB_TILD   ___
+   ___ &kp F1 &kp F2  &kp F3  &kp F4  ___        &kp NB_UNDER &kp NB_LBKT &kp NB_RBKT &kp NB_EQUAL &kp NB_QST    ___
                                   ___ ___ ___      &kp_mt LSHIFT DEL  ___ ___
                         >;
                 };
