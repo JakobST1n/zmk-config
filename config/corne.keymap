@@ -30,9 +30,15 @@
 
 #include "includes/common.h"
 
-#ifdef HAS_MOUSE_TP
-     #include "includes/mouse_tp.dtsi"
-#endif
+// #define HAS_MOUSE_KEYS
+// #define HAS_MOUSE_TP
+// #ifdef HAS_MOUSE_KEYS
+//      #include "includes/mouse_keys.dtsi"
+// #endif
+// 
+// #ifdef HAS_MOUSE_TP
+//      #include "includes/mouse_tp.dtsi"
+// #endif
 
 // COMBO(lnx_oe_comb, K_O K_E, DEFAULT, &lnx_no_oe)
 // COMBO(lnx_ae_comb, K_A K_E, DEFAULT, &lnx_no_ae)
@@ -55,7 +61,7 @@ COMBO(tab_comb, LM3 LM2, DEFAULT, &kp TAB)
                         bindings = <
    XXX &kp Q &kp W       &kp E       &kp R        &kp T  &kp Y &kp U        &kp I        &kp O       &kp P       &kp LBKT
    XXX &kp A &hml LGUI S &hml LALT D &hml LCTRL F &kp G  &kp H &hmr LCTRL J &hmr LALT K  &hmr LGUI L &kp SEMI    &kp SQT
-   XXX &kp Z &kp X       &kp C       &kp V        &kp B  &kp N &kp M        &kp COMMA    &kp DOT     &kp NB_FSLH XXX
+   XXX &kp Z &kp X       &kp C       &kp V        &kp B  &kp N &kp M        &kp COMMA    &kp DOT     &kp NB_FSLH &mo SUPER
                       XXX &kp_mo_hold RAISE RET &kp LSHIFT &kp_mt LSHIFT BSPC &kp_mo_tap LOWER SPACE XXX
                         >;
                 };
@@ -101,34 +107,34 @@ COMBO(tab_comb, LM3 LM2, DEFAULT, &kp TAB)
                                   ___ ___ ___      ___  ___ ___
                         >;
                 };
-                MouseTP_layer {
-// ---------------------------------------------------------------------------------------------
-// |       |     |     |     |     |         |   |         |       |       |      |     |      |
-// |       |     |     |     |     |         |   |         |       |       |      |     |      |
-// |       |     |     |     |     |         |   |         |       |       |      |     |      |
-//                     |     |     |         |   |         |       |       |
-                        label = "TP";
-                        bindings = <
-    XXX XXX XXX XXX XXX XXX &mkp MCLK &mkp RCLK XXX XXX XXX ___
-    XXX XXX XXX ___ ___ ___ XXX       XXX       XXX XXX XXX XXX
-    XXX XXX XXX XXX XXX XXX XXX       XXX       XXX XXX XXX XXX
-              ___ ___ ___      &mkp LCLK  ___ ___
-                        >;
-                };
-                MOUSE {
-// ---------------------------------------------------------------------------------------------
-// |       |     |     |     |     |         |   |         |       |       |      |     |      |
-// |       |     |     |     |     |         |   |         |       |       |      |     |      |
-// |       |     |     |     |     |         |   |         |       |       |      |     |      |
-//                     |     |     |         |   |         |       |       |
-                        label = "Mouse";
-                        bindings = <
-    &mms MS_TP_SENSITIVITY_INCR XXX XXX XXX XXX XXX  &mkp MCLK      &mkp RCLK XXX XXX XXX ___
-    &mms MS_TP_SENSITIVITY_DECR XXX ___ ___ ___ XXX  &msc SCRL_UP   XXX       XXX XXX XXX XXX
-    XXX                         XXX XXX XXX XXX XXX  &msc SCRL_DOWN XXX       XXX XXX XXX XXX
-              ___ ___ ___      &mkp LCLK  ___ ___
-                        >;
-                };
+//                 MouseTP_layer {
+// // ---------------------------------------------------------------------------------------------
+// // |       |     |     |     |     |         |   |         |       |       |      |     |      |
+// // |       |     |     |     |     |         |   |         |       |       |      |     |      |
+// // |       |     |     |     |     |         |   |         |       |       |      |     |      |
+// //                     |     |     |         |   |         |       |       |
+//                         label = "TP";
+//                         bindings = <
+//     XXX XXX XXX XXX XXX XXX &mkp MCLK &mkp RCLK XXX XXX XXX ___
+//     XXX XXX XXX ___ ___ ___ XXX       XXX       XXX XXX XXX XXX
+//     XXX XXX XXX XXX XXX XXX XXX       XXX       XXX XXX XXX XXX
+//               ___ ___ ___      &mkp LCLK  ___ ___
+//                         >;
+//                 };
+//                 MOUSE {
+// // ---------------------------------------------------------------------------------------------
+// // |       |     |     |     |     |         |   |         |       |       |      |     |      |
+// // |       |     |     |     |     |         |   |         |       |       |      |     |      |
+// // |       |     |     |     |     |         |   |         |       |       |      |     |      |
+// //                     |     |     |         |   |         |       |       |
+//                         label = "Mouse";
+//                         bindings = <
+//     &mms MS_TP_SENSITIVITY_INCR XXX XXX XXX XXX XXX  &mkp MCLK      &mkp RCLK XXX XXX XXX ___
+//     &mms MS_TP_SENSITIVITY_DECR XXX ___ ___ ___ XXX  &msc SCRL_UP   XXX       XXX XXX XXX XXX
+//     XXX                         XXX XXX XXX XXX XXX  &msc SCRL_DOWN XXX       XXX XXX XXX XXX
+//               ___ ___ ___      &mkp LCLK  ___ ___
+//                         >;
+//                 };
         };
 };
 
